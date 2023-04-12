@@ -7,9 +7,9 @@ int main (void)
     int subt = 0;
     printf("Subtrair o primeiro pelo segundo.\n");
     printf("Digite o primeiro valor: ");
-    scanf("%d/n",&x);
+    scanf("%d",&x);
     printf("Digite o segundo valor: ");
-    scanf("%d/n",&y);
+    scanf("%d",&y);
     subt = x - y;
     printf("A subtracao do primeiro pelo segundo e: %d \n", subt);
     return (0);
