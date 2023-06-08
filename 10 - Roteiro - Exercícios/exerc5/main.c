@@ -95,7 +95,7 @@ void imprimeAlunos(ALUNOS aluno[])
         printf("Digite o nome do aluno: %s\n", aluno[i].nome);
         printf("Digite o nome do curso: %s\n", aluno[i].curso);
         printf("Digite a nota da prova 1: %d\n", aluno[i].notaProva1);
-        printf("Digite a nota da prova 2: %d\n"), aluno[i].notaProva2;
+        printf("Digite a nota da prova 2: %d\n", aluno[i].notaProva2);
         printf("Digite a nota da prova final: %d\n", aluno[i].notaProvaFinal);
         i++;
     }
