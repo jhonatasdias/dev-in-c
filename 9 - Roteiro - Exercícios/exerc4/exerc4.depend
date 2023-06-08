@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1685666083 source:/home/jhonatadias/Documentos/exerc4/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1685666245 source:/home/jhonatadias/Documentos/C/9-Roteiro/exerc4/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1685666245 source:/home/jhonatadias/Documentos/1-Semestre/AEDI/Roteiros/9/exerc4/main.c
+	<stdio.h>
+	<stdlib.h>
+
