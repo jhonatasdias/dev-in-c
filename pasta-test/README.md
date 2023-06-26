@@ -39,15 +39,15 @@ Na sequência, crie uma pasta `public` e inclua os arquivos `index.html`, `app.j
 
 A estrutura do projeto deverá ficar tal como o seguinte quadro.
 
-> app/ 
-> ├── public/ 
-> │ ├── index.html
-> │ ├── app.js 
-> │ └── style.css 
-> ├── .env 
-> ├── .gitignore 
-> ├── server.js 
-> └── package.json
+ app/ 
+ ├── public/ 
+ │ ├── index.html
+ │ ├── app.js 
+ │ └── style.css 
+ ├── .env 
+ ├── .gitignore 
+ ├── server.js 
+ └── package.json
 
 Para nos ajudar no processo de testes da aplicação, vamos instalar o NodeMon que reinicia o servidor Node.js todas as vezes que um arquivo for alterado. Para isso execute o seguinte comando:
 
