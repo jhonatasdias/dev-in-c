@@ -64,19 +64,19 @@ Em seguida, faça o deploy do projeto para o ambiente do Heroku e teste novament
 Monte um snapshot com o git e faça o deploy da aplicação para o Heroku. Para isso execute os comandos a seguir, um de cada vez.
 
 
-> # adiciona os arquivos à stage do git
-> git add .
-> # realiza commit criando novo snapshot
-> git commit -m "Primeira versão"
-> # faz o deploy do branch master da aplicação para o heroku
-> git push remote master
+# adiciona os arquivos à stage do git
+`git add` .
+# realiza commit criando novo snapshot
+`git commit -m "Primeira versão"`
+# faz o deploy do branch master da aplicação para o heroku
+`git push remote master`
 
 
 Faça um teste da sua aplicação no Heroku para verificar se está tudo ok. Para isso acesse a URL: **http://appnodexyz.herokuapp.com/app** (lembre-se que o xyz foi substituído pelas suas iniciais).
 
 Se tudo foi seguido corretamente, você deverá ver a seguinte tela:
 
-// img ![hello-worl](./documentation/img/hello-worl.png)
+![hello-worl](./documentation/img/hello-worl.png)
 
 Se tiver algum problema nesse teste, verifique os logs da sua aplicação no Heroku para identificar a causa do problema. Para isso, use o Heroku CLI para apresentar o final do arquivo de logs com o comando a seguir.
 
