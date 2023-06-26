@@ -11,6 +11,7 @@ Neste roteiro vamos montar uma API RESTful para a realização das operações d
 Abra uma pasta para o novo projeto com o Visual Studio Code a e inicie o projeto com o npm **(npm init -y)** e instale os seguintes pacotes: express, dotenv, knex, pg, bcryptjs, jsonwebtoken e cors. Um comando direto para a instalação segue abaixo.
 
 > $ npm install express dotenv knex pg bcryptjs jsonwebtoken cors –save
+
 **OBSERVAÇÃO:** observe o parâmetro --save que informa ao npm para incluir tais módulos como dependências do projeto no arquivo `package.json`.
 
 Em seguida, utilize o código apresentado no Quadro 1 para criar o arquivo `server.js` e estabelecer um servidor baseado no Express já preparado para aceitar requisições com o CORS e processar o corpo das requisições interpretando formatos json e urlencoded. Adicionalmente, nosso servidor já estabelecerá uma pasta `/public` para os arquivos estáticos da parte cliente da nossa aplicação. Esta pasta será acessada por meio da rota `/app` nas URLs.
@@ -51,6 +52,7 @@ A estrutura do projeto deverá ficar tal como o seguinte quadro.
 Para nos ajudar no processo de testes da aplicação, vamos instalar o NodeMon que reinicia o servidor Node.js todas as vezes que um arquivo for alterado. Para isso execute o seguinte comando:
 
 > $ npm install -g nodemon
+
 **OBSERVAÇÃO:** observe o parâmetro -g para instalação do nodemon de forma global para utilizar em todos os seus projetos.
 
 Execute o nodemon sobre o arquivo `server.js` **(nodemon server.js)** e faça um teste do site através do endereço **http://localhost:3000/app/**
