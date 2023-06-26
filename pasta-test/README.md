@@ -11,23 +11,27 @@ Neste roteiro vamos montar uma API RESTful para a realização das operações d
 Abra uma pasta para o novo projeto com o Visual Studio Code a e inicie o projeto com o npm **(npm init -y)** e instale os seguintes pacotes: express, dotenv, knex, pg, bcryptjs, jsonwebtoken e cors. Um comando direto para a instalação segue abaixo.
 
 > $ npm install express dotenv knex pg bcryptjs jsonwebtoken cors –save
+
 **OBSERVAÇÃO:** observe o parâmetro --save que informa ao npm para incluir tais módulos como dependências do projeto no arquivo `package.json`.
 
 Em seguida, utilize o código apresentado no Quadro 1 para criar o arquivo `server.js` e estabelecer um servidor baseado no Express já preparado para aceitar requisições com o CORS e processar o corpo das requisições interpretando formatos json e urlencoded. Adicionalmente, nosso servidor já estabelecerá uma pasta `/public` para os arquivos estáticos da parte cliente da nossa aplicação. Esta pasta será acessada por meio da rota `/app` nas URLs.
 
 ### Quadro 1 - Código para o servidor server.js.
 
-
 ```javascript
 require('dotenv').config()
+
 const express = require ('express')
 const cors = require('cors');
 const path = require ('path')
 const app = express ()
+
 app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 app.use('/app', express.static (path.join (__dirname, '/public')))
+
 let port = process.env.PORT || 3000
 app.listen (port)
 ```
@@ -38,19 +42,12 @@ Na sequência, crie uma pasta `public` e inclua os arquivos `index.html`, `app.j
 
 A estrutura do projeto deverá ficar tal como o seguinte quadro.
 
-> app/ 
-> ├── public/ 
-> │ ├── index.html
-> │ ├── app.js 
-> │ └── style.css 
-> ├── .env 
-> ├── .gitignore 
-> ├── server.js 
-> └── package.json
+![arvore-de-arquivos](./documentation/img/arvore-de-arquivos.png)
 
 Para nos ajudar no processo de testes da aplicação, vamos instalar o NodeMon que reinicia o servidor Node.js todas as vezes que um arquivo for alterado. Para isso execute o seguinte comando:
 
 > $ npm install -g nodemon
+
 **OBSERVAÇÃO:** observe o parâmetro -g para instalação do nodemon de forma global para utilizar em todos os seus projetos.
 
 Execute o nodemon sobre o arquivo `server.js` **(nodemon server.js)** e faça um teste do site através do endereço **http://localhost:3000/app/**
@@ -62,11 +59,13 @@ Em seguida, faça o deploy do projeto para o ambiente do Heroku e teste novament
 Monte um snapshot com o git e faça o deploy da aplicação para o Heroku. Para isso execute os comandos a seguir, um de cada vez.
 
 
-> # adiciona os arquivos à stage do git
+### adiciona os arquivos à stage do git
 > git add .
-> # realiza commit criando novo snapshot
+
+### realiza commit criando novo snapshot
 > git commit -m "Primeira versão"
-> # faz o deploy do branch master da aplicação para o heroku
+
+### faz o deploy do branch master da aplicação para o heroku
 > git push remote master
 
 
@@ -74,7 +73,7 @@ Faça um teste da sua aplicação no Heroku para verificar se está tudo ok. Par
 
 Se tudo foi seguido corretamente, você deverá ver a seguinte tela:
 
-// img ![hello-worl](./documentation/img/hello-worl.png)
+![hello-worl](./documentation/img/hello-worl.png)
 
 Se tiver algum problema nesse teste, verifique os logs da sua aplicação no Heroku para identificar a causa do problema. Para isso, use o Heroku CLI para apresentar o final do arquivo de logs com o comando a seguir.
 
@@ -98,13 +97,13 @@ Inicialmente, vamos fazer uma prova de conceito com dados baseados em um array s
 
 ```javascript
 const db_produtos = {
-produtos: [
-{ id: 1, descricao: "Arroz parboilizado 5Kg", valor: 25.00, marca: "Tio João" },
-{ id: 2, descricao: "Maionese 250gr", valor: 7.20, marca: "Helmans" },
-{ id: 3, descricao: "Iogurte Natural 200ml", valor: 2.50, marca: "Itambé" },
-{ id: 4, descricao: "Batata Maior Palha 300gr", valor: 15.20, marca: "Chipps" },
-{ id: 5, descricao: "Nescau 400gr", valor: 8.00, marca: "Nestlé" },
-]
+    produtos: [
+        { id: 1, descricao: "Arroz parboilizado 5Kg", valor: 25.00, marca: "Tio João" },
+        { id: 2, descricao: "Maionese 250gr", valor: 7.20, marca: "Helmans" },
+        { id: 3, descricao: "Iogurte Natural 200ml", valor: 2.50, marca: "Itambé" },
+        { id: 4, descricao: "Batata Maior Palha 300gr", valor: 15.20, marca: "Chipps" },
+        { id: 5, descricao: "Nescau 400gr", valor: 8.00, marca: "Nestlé" },
+    ]
 }
 ```
 
@@ -113,18 +112,21 @@ Agora, crie um router do Express para a API em um arquivo `/api/routes/apiRouter
 ```javascript
 const express = require ('express')
 let apiRouter = express.Router()
+
 const endpoint = '/'
 const lista_produtos = {
-produtos: [
-{ id: 1, descricao: "Produto 1", valor: 5.00, marca: "marca " },
-{ id: 2, descricao: "Produto 2", valor: 5.00, marca: "marca " },
-{ id: 3, descricao: "Produto 3", valor: 5.00, marca: "marca " },
-]
+    produtos: [
+        { id: 1, descricao: "Produto 1", valor: 5.00, marca: "marca " },
+        { id: 2, descricao: "Produto 2", valor: 5.00, marca: "marca " },
+        { id: 3, descricao: "Produto 3", valor: 5.00, marca: "marca " },
+    ]
 }
 apiRouter.get (endpoint + 'produtos', function (req, res) {
 res.status(200).json (lista_produtos)
 })
+
 ...
+
 module.exports = apiRouter;
 ```
 
@@ -132,6 +134,7 @@ Pronto, inclua no seu arquivo `server.js` a referência ao API router na nossa a
 
 ```javascript
 const apiRouter = require('./api/routes/api_routes')
+
 app.use ('/api', apiRouter)
 ```
 
@@ -154,11 +157,11 @@ Script para criação da tabela **Produto**
 ```javascript
 CREATE SEQUENCE produto_id_seq;
 CREATE TABLE produto (
-id int4 NOT NULL DEFAULT nextval('produto_id_seq'),
-descricao varchar(200) NOT NULL,
-valor numeric NOT NULL DEFAULT 0,
-marca varchar(100) NULL,
-CONSTRAINT produto_pk PRIMARY KEY (id)
+    id int4 NOT NULL DEFAULT nextval('produto_id_seq'),
+    descricao varchar(200) NOT NULL,
+    valor numeric NOT NULL DEFAULT 0,
+    marca varchar(100) NULL,
+    CONSTRAINT produto_pk PRIMARY KEY (id)
 );
 CREATE UNIQUE INDEX produto_id_idx ON public.produto USING btree (id);
 ```
@@ -167,41 +170,41 @@ Script para carga inicial da tabela de **Produto**
 
 ```javascript
 INSERT INTO produto (descricao, valor, marca)
-VALUES('Arroz parboilizado 5Kg', 25, 'Tio João');
+    VALUES('Arroz parboilizado 5Kg', 25, 'Tio João');
 INSERT INTO produto (descricao, valor, marca)
-VALUES('Maionese 250gr', 7.2, 'Helmanns');
+    VALUES('Maionese 250gr', 7.2, 'Helmanns');
 INSERT INTO produto (descricao, valor, marca)
-VALUES('Iogurte Natural 200ml', 2.5, 'Itambé');
+    VALUES('Iogurte Natural 200ml', 2.5, 'Itambé');
 INSERT INTO produto (descricao, valor, marca)
-VALUES('Nescau 400gr', 8, 'Nestlé');
+    VALUES('Nescau 400gr', 8, 'Nestlé');
 INSERT INTO produto (descricao, valor, marca)
-VALUES('Batata Palha 180gr', 5.20, 'Chipps');
+    VALUES('Batata Palha 180gr', 5.20, 'Chipps');
 INSERT INTO produto (descricao, valor, marca)
-VALUES('Feijão Carioquinha', 5, 'Xap');
+    VALUES('Feijão Carioquinha', 5, 'Xap');
 ```
 
 Agora que temos o banco de dados funcional, vamos utilizar o módulo Knex para realizar a conexão com o banco de dados. Para isso, inclua o código de configuração da conexão com o banco de dados no início do router, logo após a importação dos módulos necessários, conforme quadro a seguir.
 
 ```javascript
 const knex = require('knex')({
-client: 'pg',
-debug: true,
-connection: {
-connectionString : process.env.DATABASE_URL,
-ssl: { rejectUnauthorized: false },
-}
+    client: 'pg',
+    debug: true,
+    connection: {
+        connectionString : process.env.DATABASE_URL,
+        ssl: { rejectUnauthorized: false },
+    }
 });
 ```
 Agora, altere o código do middleware que atende às requisições de GET /api/produtos, colocando o código que segue no quadro a seguir
 
 ```javascript
 apiRouter.get(endpoint + 'produtos', (req, res) => {
-knex.select('*').from('produto')
-.then( produtos => res.status(200).json(produtos) )
-.catch(err => {
-res.status(500).json({
-message: 'Erro ao recuperar produtos - ' + err.message })
-})
+    knex.select('*').from('produto')
+    .then( produtos => res.status(200).json(produtos) )
+    .catch(err => {
+        res.status(500).json({
+            message: 'Erro ao recuperar produtos - ' + err.message })
+    })
 })
 ```
 
@@ -231,13 +234,13 @@ Script para criação da tabela **Usuário**
 ```javascript
 CREATE SEQUENCE usuario_id_seq;
 CREATE TABLE public.usuario (
-id int NOT NULL DEFAULT nextval('usuario_id_seq'),
-nome varchar(200) NOT NULL,
-email varchar(100) NOT NULL,
-login varchar(100) NOT NULL,
-senha varchar(100) NOT NULL,
-roles varchar (200) NOT NULL DEFAULT 'USER',
-CONSTRAINT usuario_pk PRIMARY KEY (id)
+    id int NOT NULL DEFAULT nextval('usuario_id_seq'),
+    nome varchar(200) NOT NULL,
+    email varchar(100) NOT NULL,
+    login varchar(100) NOT NULL,
+    senha varchar(100) NOT NULL,
+    roles varchar (200) NOT NULL DEFAULT 'USER',
+    CONSTRAINT usuario_pk PRIMARY KEY (id)
 );
 ```
 
@@ -245,9 +248,9 @@ Script para carga inicial da tabela de **Usuario**
 
 ```javascript
 INSERT INTO usuario (nome, login, senha, email, roles)
-VALUES('user', 'user', '$2a$08$tprzZIs1OTKVMaVzZWrKfe8rX3toatWD6lsvp4u9AR54mrbSSLX7e', 'user@abc.com.br', 'USER');
+    VALUES('user', 'user', '$2a$08$tprzZIs1OTKVMaVzZWrKfe8rX3toatWD6lsvp4u9AR54mrbSSLX7e', 'user@abc.com.br', 'USER');
 INSERT INTO usuario (nome, login, senha, email, roles)
-VALUES('admin', 'admin', ' $2a$08$tprzZIs1OTKVMaVzZWrKfe8rX3toatWD6lsvp4u9AR54mrbSSLX7e', 'admini@abc.com.br', 'USER;ADMIN');
+    VALUES('admin', 'admin', ' $2a$08$tprzZIs1OTKVMaVzZWrKfe8rX3toatWD6lsvp4u9AR54mrbSSLX7e', 'admini@abc.com.br', 'USER;ADMIN');
 ```
 
 **OBSERVAÇÃO:** Perceba que a senha (1234) é armazenada no banco na forma de um hash e não no formato aberto. A representação acima é obtida por meio do módulo bcrypt, mencionado no início do roteiro.
@@ -260,22 +263,22 @@ O quadro a seguir, apresenta o código para o registro de novos usuários. Nesse
 const bcrypt = require('bcryptjs')
 ...
 apiRouter.post (endpoint + 'seguranca/register', (req, res) => {
-knex ('usuario')
-.insert({
-nome: req.body.nome,
-login: req.body.login,
-senha: bcrypt.hashSync(req.body.senha, 8),
-email: req.body.email
-}, ['id'])
-.then((result) => {
-let usuario = result[0]
-res.status(200).json({e"id": usuario.id })
-return
-})
-.catch(err => {
-res.status(500).json({
-message: 'Erro ao registrar usuario - ' + err.message })
-})
+    knex ('usuario')
+        .insert({
+        nome: req.body.nome,
+        login: req.body.login,
+        senha: bcrypt.hashSync(req.body.senha, 8),
+        email: req.body.email
+        }, ['id'])
+        .then((result) => {
+        let usuario = result[0]
+        res.status(200).json({e"id": usuario.id })
+        return
+        })
+        .catch(err => {
+        res.status(500).json({
+        message: 'Erro ao registrar usuario - ' + err.message })
+        })
 })
 ```
 
@@ -334,22 +337,23 @@ O quadro abaixo traz o código do middleware checkToken que executa a verificaç
 
 ```javascript
 let checkToken = (req, res, next) => {
-let authToken = req.headers["authorization"]
-if (!authToken) {
-res.status(401).json({ message: 'Token de acesso requerida' })
-}
-else {
-let token = authToken.split(' ')[1]
-req.token = token
-}
-jwt.verify(req.token, process.env.SECRET_KEY, (err, decodeToken) => {
-if (err) {
-res.status(401).json({ message: 'Acesso negado'})
-return
-}
-req.usuarioId = decodeToken.id
-next()
-})
+    let authToken = req.headers["authorization"]
+    if (!authToken) {
+        res.status(401).json({ message: 'Token de acesso requerida' })
+    }
+    else {
+        let token = authToken.split(' ')[1]
+        req.token = token
+    }
+
+    jwt.verify(req.token, process.env.SECRET_KEY, (err, decodeToken) => {
+        if (err) {
+            res.status(401).json({ message: 'Acesso negado'})
+            return
+        }
+        req.usuarioId = decodeToken.id
+        next()
+    })
 }
 ```
 
@@ -362,27 +366,27 @@ No quadro a seguir, é apresentado o código do middleware que verifica se o usu
 
 ```javascript
 let isAdmin = (req, res, next) => {
-knex
-.select ('*').from ('usuario').where({ id: req.usuarioId })
-.then ((usuarios) => {
-if (usuarios.length) {
-let usuario = usuarios[0]
-let roles = usuario.roles.split(';')
-let adminRole = roles.find(i => i === 'ADMIN')
-if (adminRole === 'ADMIN') {
-next()
-return
-}
-else {
-res.status(403).json({ message: 'Role de ADMIN requerida' })
-return
-}
-}
-})
-.catch (err => {
-res.status(500).json({
-message: 'Erro ao verificar roles de usuário - ' + err.message })
-})
+    knex
+        .select ('*').from ('usuario').where({ id: req.usuarioId })
+        .then ((usuarios) => {
+            if (usuarios.length) {
+                let usuario = usuarios[0]
+                let roles = usuario.roles.split(';')
+                let adminRole = roles.find(i => i === 'ADMIN')
+                if (adminRole === 'ADMIN') {
+                    next()
+                    return
+                }
+                else {
+                    res.status(403).json({ message: 'Role de ADMIN requerida' })
+                    return
+                }
+            }
+        })
+        .catch (err => {
+        res.status(500).json({
+        message: 'Erro ao verificar roles de usuário - ' + err.message })
+        })
 }
 ```
 
@@ -390,8 +394,9 @@ Agora que já temos os middlewares de verificação da token, podemos incluir es
 
 ```javascript
 // rotinas permitidas para qualquer usuário
-apiRouter.get(endpoint + 'produtos', checkToken, (req, res) => { ... }
+apiRouter.get(endpoint + 'produtos', checkToken, (req, res) => { ... })
 apiRouter.get(endpoint + 'produtos/:id', checkToken, (req, res) => { ... })
+
 // rotinas permitidas apenas para administradores
 apiRouter.post(endpoint + 'produtos', checkToken, isAdmin, (req, res) => { ... }) apiRouter.put(endpoint + 'produtos/:id', checkToken, isAdmin, (req, res) => { ... }) apiRouter.delete(endpoint + 'produtos/:id', checkToken, isAdmin, (req, res) => { ... })
 ```
