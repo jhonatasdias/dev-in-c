@@ -1,0 +1,6 @@
+**/bin/
+**/obj/
+**/*.dat
+**/*.cbp
+**/*.layout
+**/*.pdf
