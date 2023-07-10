@@ -18,11 +18,11 @@ int main()
         printf("0 -> SAIR\n:");
         scanf("%d", &resp);
         switch(resp){
-            case 1: cadastramentoCliente();break;//função imcompleta - CLIENTE
+            case 1: cadastramentoCliente();break;
             case 2: cadastramentoFornecedor();break;
-            case 3: cadastramentoFesta();break;//função imcompleta - FESTA
-            case 4: cadastramentoContrato(); break;//função imcompleta - CONTRATO
-            case 5: impressaoRelatorio(); break;//função imcompleta - RELATORIOS
+            case 3: cadastramentoFesta();break;
+            case 4: cadastramentoContrato(); break;
+            case 5: impressaoRelatorio(); break;
             case 0: break;//sair do programa.
             default: printf("Opcao invalida - Aperte ENTER para continuar.\n");getchar();
         }
